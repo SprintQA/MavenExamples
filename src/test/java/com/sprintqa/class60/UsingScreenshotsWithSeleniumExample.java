@@ -2,8 +2,8 @@ package com.sprintqa.class60;
 
 import org.junit.jupiter.api.Test;
 
-import utils.CommonMethods;
-import utils.ConfigsReader;
+import com.sprintqa.utils.CommonMethods;
+import com.sprintqa.utils.ConfigsReader;
 
 class UsingScreenshotsWithSeleniumExample extends CommonMethods{
 
