@@ -7,8 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -18,33 +16,28 @@ public class BaseClass {
 	@BeforeEach
 	void setUp() throws Exception {
 		ConfigsReader.readProperties(Constants.CONFIGFILEPATH);
-		
-//		System.setProperty("webdriver.chrome.driver",
-//				"/Users/mpmeloche/Development/eclipse/workspace/SeleniumExamples/webdrivers/chromedriver");
-//
-//		// Declare your webDriver class variable to a ChromeDriver WebDriver to
-//		// communicate with Chrome.
-//		webDriver = new ChromeDriver();
 
-		//webDriver = getBrowserSpecificWebDriver(ConfigsReader.getProperty("browser")); 
-		WebDriverManager.chromedriver().version("80.0.3987.106").setup();
+		// Use WebDriverManager to download the correct binary
+		// and set classpath
+		WebDriverManager.chromedriver().setup();
+
+		// Setup WebDriver to Use Chrome
 		webDriver = new ChromeDriver();
-		
-		
-		// Set our timeouts		
+
+		// Set our timeouts
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
+
 		// Set window size
 		webDriver.manage().window().fullscreen();
-		
+
 		// Set our starting url based on properties file
 		webDriver.get(ConfigsReader.getProperty("url"));
-		webDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);		
+		webDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		//3.
+		// 3.
 		try {
 			webDriver.close();
 		} catch (Exception e) {
@@ -59,48 +52,4 @@ public class BaseClass {
 		}
 	}
 
-	private String getWebDriverBinaryPath() {
-		String userWorkingDirectory = System.getProperty("user.dir");
-		String os = System.getProperty("os.name");
-
-		String binaryPath = "";
-		System.out.println(os.substring(0, 3));
-
-		switch (os.substring(0, 3).toLowerCase()) {
-		case "win":
-			binaryPath = "/webdrivers/win/";
-			break;
-
-		case "mac":
-			binaryPath = "/webdrivers/mac/";
-			break;
-
-		case "lin":
-			binaryPath = "/webdrivers//lin";
-		}
-
-		return userWorkingDirectory + binaryPath;
-	}
-	
-	private WebDriver getBrowserSpecificWebDriver(String browser) {
-		WebDriver driver = null;
-		switch (browser) {
-		case "firefox":
-			System.setProperty("webdriver.firefox.driver", getWebDriverBinaryPath()+"geckodriver");
-			driver = new FirefoxDriver();
-			break;
-
-		case "chrome":
-			System.setProperty("webdriver.chrome.driver", getWebDriverBinaryPath()+"chromedriver");
-			driver = new ChromeDriver();
-			break;
-		case "edge":
-			System.setProperty("webdriver.edge.driver", getWebDriverBinaryPath()+"msedgedriver");
-			driver = new EdgeDriver();
-		}
-		
-		
-		return driver;
-	}
-	
 }

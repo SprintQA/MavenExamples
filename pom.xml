@@ -8,10 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-	
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-	
 	</properties>
 
 	<dependencies>
@@ -36,6 +34,13 @@
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
 			<version>3.3.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.0</version>
 		</dependency>
 
 	</dependencies>
