@@ -10,15 +10,22 @@ class ExcelUtilExample extends CommonMethods{
 
 	@Test
 	void test() throws InterruptedException {
-		ExcelUtil excelUtil = new ExcelUtil();
-		excelUtil.openExcel(Constants.EXCELFILEPATH, "login");
+		ExcelUtil loginSheet = new ExcelUtil();
+		loginSheet.openExcel(Constants.EXCELFILEPATH, "login");
 		
-		sendText(getWebElementById("txtUsername"), excelUtil.getCellData(1, 0));
-		sendText(getWebElementById("txtPassword"), excelUtil.getCellData(1, 1));
+		sendText(getWebElementById("txtUsername"), loginSheet.getCellData(1, 0));
+		sendText(getWebElementById("txtPassword"), loginSheet.getCellData(1, 1));
 
 		Thread.sleep(1000);
 		
 		submitForm(getWebElementById("frmLogin"));
+		
+		
+		ExcelUtil userMaintSheet = new ExcelUtil();
+		userMaintSheet.openExcel(Constants.EXCELFILEPATH, "usermaint");
+		
+		
+		
 		
 		Thread.sleep(3000);
 		
