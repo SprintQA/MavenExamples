@@ -11,8 +11,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
-	public WebDriver webDriver;
+	private WebDriver webDriver;
 
+	public WebDriver getWebDriver() {
+		return webDriver;
+	}
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		ConfigsReader.readProperties(Constants.CONFIGFILEPATH);

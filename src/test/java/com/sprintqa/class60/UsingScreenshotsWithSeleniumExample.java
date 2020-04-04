@@ -1,6 +1,8 @@
 package com.sprintqa.class60;
 
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.sprintqa.utils.CommonMethods;
 import com.sprintqa.utils.ConfigsReader;
@@ -19,6 +21,7 @@ class UsingScreenshotsWithSeleniumExample extends CommonMethods{
 		
 		takeScreenshot("screenshots/orangehrmlive_Main_page.png");
 		Thread.sleep(3000);
+		
 	}
 
 }

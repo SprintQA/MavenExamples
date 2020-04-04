@@ -11,22 +11,23 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class CommonMethods extends BaseClass {
-
+	public WebDriver webDriver;
 	
 	public void takeScreenshot(String fileName) {
-		TakesScreenshot ts = (TakesScreenshot) webDriver;
+		TakesScreenshot ts = (TakesScreenshot) getWebDriver();
 
 		try {
 			File screenShot = ts.getScreenshotAs(OutputType.FILE);
 			InputStream inputStream = new FileInputStream(screenShot);
 
 			File outputFile = new File(fileName);
-
-			Files.copy(inputStream, outputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+	Files
+		.copy(inputStream, outputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
 			inputStream.close();
 			
@@ -36,9 +37,22 @@ public class CommonMethods extends BaseClass {
 		}
 	}
 	
+	public void takeScreenshot2(String fileName) throws IOException {
+		TakesScreenshot ts = (TakesScreenshot) getWebDriver();
+
+			File screenShot = ts.getScreenshotAs(OutputType.FILE);
+			InputStream inputStream = new FileInputStream(screenShot);
+
+			File outputFile = new File(fileName);
+
+			Files.copy(inputStream, outputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+			inputStream.close();
+			
+	}
 
 	public void acceptAlert() {
-		webDriver.switchTo().alert().accept();
+		getWebDriver().switchTo().alert().accept();
 	}
 
 	public void selectByIndex(WebElement element, int index) {
@@ -69,7 +83,7 @@ public class CommonMethods extends BaseClass {
 	}
 	
 	public WebElement getWebElement(By locator) {
-		return webDriver.findElement(locator);
+		return getWebDriver().findElement(locator);
 	}
 	
 	public WebElement getWebElementById(String id) {
@@ -85,7 +99,7 @@ public class CommonMethods extends BaseClass {
 	}
 	
 	public List<WebElement> getWebElements(By locator) {
-		return webDriver.findElements(locator);
+		return getWebDriver().findElements(locator);
 	}
 	
 	public List<WebElement> getWebElementsById(String id) {
