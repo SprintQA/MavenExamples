@@ -6,11 +6,11 @@ import com.sprintqa.pages.AddUser;
 import com.sprintqa.pages.HomePage;
 import com.sprintqa.pages.LoginPage;
 import com.sprintqa.pages.UserManagement;
-import com.sprintqa.utils.CommonMethods;
+import com.sprintqa.utils.BaseTest;
 import com.sprintqa.utils.Constants;
 import com.sprintqa.utils.ExcelUtil;
 
-public class OrangeHrmUserManagementTest extends CommonMethods{
+public class OrangeHrmUserManagementTest extends BaseTest{
 
 	@Test
 	public void test() throws InterruptedException {

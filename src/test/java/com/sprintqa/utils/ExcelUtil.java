@@ -13,10 +13,16 @@ public class ExcelUtil {
 	public XSSFWorkbook workbook;
 	public XSSFSheet sheet;
 
+	/**
+	 * method that will open specified xlFile and sheet
+	 * 
+	 * @param xlFilePath
+	 * @param sheetName
+	 */
 	public void openExcel(String xlFilePath, String sheetName) {
 
 		try {
-			
+
 			fis = new FileInputStream(xlFilePath);
 			workbook = new XSSFWorkbook(fis);
 			sheet = workbook.getSheet(sheetName);
@@ -29,17 +35,32 @@ public class ExcelUtil {
 
 	}
 
+	/**
+	 * method will return String value of specified cell
+	 * 
+	 * @param rowIndex
+	 * @param cellIndex
+	 * @return String
+	 */
 	public String getCellData(int rowIndex, int colIndex) {
-		return sheet
-				.getRow(rowIndex)
-				.getCell(colIndex)
-				.toString();
+		return sheet.getRow(rowIndex).getCell(colIndex).toString();
 	}
 
+	/**
+	 * Method will return number of actual used rows
+	 * 
+	 * @return int
+	 */
 	public int getNumberOfRows() {
 		return sheet.getPhysicalNumberOfRows();
 	}
 
+	/**
+	 * Method will return number of last columns
+	 * 
+	 * @param rowIndex
+	 * @return int
+	 */
 	public int getNumberOfColumns(int rowIndex) {
 		return sheet.getRow(rowIndex).getLastCellNum();
 	}

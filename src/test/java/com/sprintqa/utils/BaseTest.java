@@ -5,17 +5,11 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class BaseClass {
-	private WebDriver webDriver;
-
-	public WebDriver getWebDriver() {
-		return webDriver;
-	}
+public class BaseTest extends CommonMethods {
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -26,29 +20,32 @@ public class BaseClass {
 		WebDriverManager.chromedriver().setup();
 
 		// Setup WebDriver to Use Chrome
-		webDriver = new ChromeDriver();
+		setWebDriver(new ChromeDriver());
 
 		// Set our timeouts
-		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		getWebDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		// Set window size
-		webDriver.manage().window().fullscreen();
+		getWebDriver().manage().window().fullscreen();
 
 		// Set our starting url based on properties file
-		webDriver.get(ConfigsReader.getProperty("url"));
-		webDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		getWebDriver().get(ConfigsReader.getProperty("url"));
+		
+		// Set implicit page timeout
+		getWebDriver().manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		// 3.
+		// Wrap close/quit methods to handle quitting the browser
+		// Some browser require both, some do not.
 		try {
-			webDriver.close();
+			getWebDriver().close();
 		} catch (Exception e) {
 			System.out.println("Browser was unable to close: " + e.getMessage());
 		}
 		try {
-			webDriver.quit();
+			getWebDriver().quit();
 		} catch (NoSuchSessionException e) {
 			System.out.println("Browser was already exited.");
 		} catch (Exception ex) {

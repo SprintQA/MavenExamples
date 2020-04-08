@@ -5,17 +5,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.sprintqa.pages.LoginPage;
-import com.sprintqa.utils.CommonMethods;
+import com.sprintqa.utils.BaseTest;
 
-public class LoginPageExample extends CommonMethods{
+public class LoginPageExample extends BaseTest{
 
 	@Test
 	public void test() throws InterruptedException {
 		
-		LoginPage login = new LoginPage(webDriver);
+		LoginPage login = new LoginPage(getWebDriver());
 		
 		
-		WebDriverWait wait = new WebDriverWait(webDriver, 30);
+		WebDriverWait wait = new WebDriverWait(getWebDriver(), 30);
 		
 		wait.until(ExpectedConditions.visibilityOf(login.logo));
 		

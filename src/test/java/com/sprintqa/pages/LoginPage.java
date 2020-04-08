@@ -28,6 +28,7 @@ public class LoginPage extends CommonMethods {
 	public WebElement message;
 	
 	public LoginPage(WebDriver webDriver) {
+		setWebDriver(webDriver);
 		PageFactory.initElements(webDriver, this);
 	}
 	

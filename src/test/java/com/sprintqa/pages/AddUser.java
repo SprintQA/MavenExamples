@@ -35,11 +35,17 @@ public class AddUser extends CommonMethods{
 	public WebElement cancelBtn;
 
 	public AddUser(WebDriver webDriver) {
+		setWebDriver(webDriver);
 		PageFactory.initElements(webDriver, this);
 	}
 	
 	public void populate(ExcelUtil excelUtil) {
-		selectByText(userRole, excelUtil.getCellData(1, 1));
+		selectByText(userRole, excelUtil.getCellData(1, 0));
+		sendText(employeeName, excelUtil.getCellData(1, 1));
+		sendText(userName, excelUtil.getCellData(1, 2));
+		selectByText(status, excelUtil.getCellData(1, 3));
+		sendText(password, excelUtil.getCellData(1, 4));
+		sendText(confirm, excelUtil.getCellData(1, 4));
 	}
 	
 

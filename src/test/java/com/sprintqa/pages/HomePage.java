@@ -21,6 +21,7 @@ public class HomePage extends CommonMethods{
 	public WebElement timeMenu;
 	
 	public HomePage(WebDriver webDriver) {
+		setWebDriver(webDriver);
 		PageFactory.initElements(webDriver, this);
 	}
 }
